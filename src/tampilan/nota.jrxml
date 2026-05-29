@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5570635-d530-43e6-951f-28a85d86d886">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_nota" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT 
+    pelanggan.id,
+    pelanggan.nmplgn,
+    pelanggan.jenis,
+    pelanggan.telepon,
+    pelanggan.alamat,
+
+    kasir.id_kasir,
+    kasir.nm_kasir,
+    kasir.jenis_kelamin,
+    kasir.no_telepon,
+    kasir.agama,
+    kasir.alamat AS alamat_kasir,
+    kasir.password,
+
+    barang.kd_brg,
+    barang.nm_brg,
+    barang.jenisbrg,
+    barang.hargabeli,
+    barang.hargajual,
+
+    nota.id_nota,
+    nota.tgl_nota,
+
+    isi.hb,
+    isi.hj,
+    isi.qty
+
+FROM nota
+
+INNER JOIN pelanggan
+ON nota.id = pelanggan.id
+
+INNER JOIN kasir
+ON nota.id_kasir = kasir.id_kasir
+
+INNER JOIN isi
+ON nota.id_nota = isi.id_nota
+
+INNER JOIN barang
+ON isi.kd_brg = barang.kd_brg
+
+WHERE nota.id_nota = $P{id_nota}]]>
+	</queryString>
+	<field name="id" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nmplgn" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jenis" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="telepon" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alamat" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_kasir" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_kasir" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jenis_kelamin" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="no_telepon" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="agama" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="alamat_kasir" class="java.lang.String"/>
+	<field name="password" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="kd_brg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nm_brg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jenisbrg" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hargabeli" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hargajual" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_nota" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="tgl_nota" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hb" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="hj" class="java.math.BigDecimal">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="qty" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="subtotal" class="java.lang.Integer">
+		<variableExpression><![CDATA[$F{qty}*$F{hj}]]></variableExpression>
+	</variable>
+	<variable name="variable1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$V{subtotal}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="52" splitType="Stretch">
+			<staticText>
+				<reportElement x="136" y="0" width="237" height="52" uuid="a4d2b608-04ed-4aae-92b1-f2f74eb237a9"/>
+				<textElement textAlignment="Center">
+					<font size="36" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="63" height="20" uuid="440d1bfa-b315-4a89-8a4a-2619608efad0"/>
+				<text><![CDATA[ID NOTA : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="116" height="20" uuid="10833b86-2c8e-4fcc-af87-015d197d63d5"/>
+				<text><![CDATA[NAMA PELANGGAN : ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="0" width="76" height="20" uuid="277acc7e-64d4-45aa-b251-379ceced1f77"/>
+				<text><![CDATA[TANGGAL :]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="30" width="92" height="20" uuid="cb8d4d44-77e6-4da9-a35c-22d7ce916b39"/>
+				<text><![CDATA[NAMA KASIR : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="136" y="0" width="100" height="20" uuid="87ac17f2-1c3b-4ccf-b800-52ee9037f422"/>
+				<textFieldExpression><![CDATA[$F{id_nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="136" y="30" width="100" height="20" uuid="30c1b09f-585a-4eb3-ada4-12c907e3484a"/>
+				<textFieldExpression><![CDATA[$F{nmplgn}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="0" width="100" height="20" uuid="8f6e8fab-849c-4c63-906f-acc7a6624d75"/>
+				<textFieldExpression><![CDATA[$F{tgl_nota}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="430" y="30" width="100" height="20" uuid="3d1a84d5-ca1e-48a2-b9b4-5403c730c5ef"/>
+				<textFieldExpression><![CDATA[$F{nm_kasir}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="63" height="20" uuid="ea30f580-e0ed-48fe-89d8-cc2ced1cdb00"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NO.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="87" y="0" width="125" height="20" uuid="4e0706bd-e090-44e9-8a5e-d84757cd3ea9"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[NAMA BARANG ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="343" y="0" width="87" height="20" uuid="0bd4d1a4-d8c6-4ab1-a0d9-83af4c4cf201"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[HARGA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="457" y="0" width="98" height="20" uuid="5d99641b-8593-4af0-8d61-b0b91a9a2eac"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="247" y="0" width="63" height="20" uuid="d8f84026-bd37-436d-b9fe-4583a5e5bd7c"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[QTY]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="69" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="63" height="20" uuid="b868bd79-be83-47b8-bb91-4851e43df52b"/>
+				<textFieldExpression><![CDATA[""+$P{REPORT_CONTEXT}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="0" width="125" height="20" uuid="3017208b-667c-4824-a384-089c11056b47"/>
+				<textFieldExpression><![CDATA[$F{nm_brg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="247" y="0" width="63" height="20" uuid="ab57745f-e08d-41b7-bfa9-6dbf5cc908b9"/>
+				<textFieldExpression><![CDATA[$F{qty}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="343" y="0" width="87" height="20" uuid="0ea90c21-2251-40a4-9d00-75f3995cbf44"/>
+				<textFieldExpression><![CDATA[$F{hj}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="0" width="100" height="20" uuid="f26d0760-301b-4192-bf4a-9091f93f2dd7"/>
+				<textFieldExpression><![CDATA[$V{subtotal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="310" y="19" width="109" height="20" uuid="a75292d4-ba03-4893-b593-f874c229ca48"/>
+				<text><![CDATA[TOTAL BELANJA : ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="430" y="19" width="125" height="20" uuid="590e6a79-7b15-4c93-b634-f50fc3f3268b"/>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
